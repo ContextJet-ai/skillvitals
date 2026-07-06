@@ -5,7 +5,6 @@
 **Vital signs for your agent skills. Does it fire when it should, and does it actually help? Measure both, on a cheap model.**
 
 [![tests](https://github.com/ContextJet-ai/skillvitals/actions/workflows/tests.yml/badge.svg)](https://github.com/ContextJet-ai/skillvitals/actions/workflows/tests.yml)
-[![PyPI](https://img.shields.io/pypi/v/skill-vitals?color=1f6feb)](https://pypi.org/project/skill-vitals/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 [![by ContextJet.ai](https://img.shields.io/badge/by-ContextJet.ai-1f6feb)](https://www.contextjetai.com)
 
@@ -14,12 +13,19 @@
 > [!NOTE]
 > Agent skills are usually shipped on faith. Two things actually decide whether one works: does its description make the model **trigger** it on the right requests, and once triggered, does it **help** the output. skillvitals measures both, so validating a skill stops being an org-only, big-budget exercise.
 
+## Install
+
+```bash
+uv tool install git+https://github.com/ContextJet-ai/skillvitals
+# or: pipx install git+https://github.com/ContextJet-ai/skillvitals
+```
+
 ## 60-second start
 
 Test whether a skill triggers correctly. No API key needed, this uses a zero-cost heuristic:
 
 ```bash
-uvx skillvitals trigger ./SKILL.md --cases cases.yaml
+skillvitals trigger ./SKILL.md --cases cases.yaml
 ```
 
 ```text

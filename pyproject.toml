@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "skill-vitals"
+name = "skillvitals"
 version = "0.1.0"
 description = "Vital signs for your agent skills: does it fire when it should, and does it actually help?"
 readme = "README.md"
