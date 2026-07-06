@@ -1,0 +1,27 @@
+name: "skillvitals"
+description: "Gate an agent skill's trigger reliability in CI"
+inputs:
+  skill:
+    description: "path to the SKILL.md"
+    required: true
+  cases:
+    description: "path to the trigger cases yaml"
+    required: true
+  min-recall:
+    description: "fail the build if recall falls below this"
+    default: "0.8"
+  model:
+    description: "optional OpenAI-compatible model id (omit for the free heuristic)"
+    default: ""
+  base-url:
+    description: "optional OpenAI-compatible base url"
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        pipx run --spec "git+https://github.com/ContextJet-ai/skillvitals" skillvitals \
+          trigger "${{ inputs.skill }}" --cases "${{ inputs.cases }}" \
+          --min-recall "${{ inputs.min-recall }}" \
+          ${{ inputs.model && format('--model {0} --base-url {1}', inputs.model, inputs.base-url) || '' }}
