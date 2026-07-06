@@ -1,0 +1,11 @@
+cases:
+  - prompt: "help me add evals to my chatbot"
+    should_fire: true
+  - prompt: "I want to test my prompt before shipping"
+    should_fire: true
+  - prompt: "how do I catch regressions in my agent"
+    should_fire: true
+  - prompt: "what is the weather in Paris today"
+    should_fire: false
+  - prompt: "write me a poem about the ocean"
+    should_fire: false

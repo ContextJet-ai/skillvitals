@@ -1,0 +1,3 @@
+tasks:
+  - prompt: "Set up an offline eval suite for my summarization prompt"
+  - prompt: "How do I know if my RAG answers are faithful to the sources?"
