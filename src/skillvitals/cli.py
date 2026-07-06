@@ -29,6 +29,9 @@ def _cmd_trigger(args) -> int:
     cases = _load_yaml(args.cases)["cases"]
     metrics, _ = run_trigger(skill, cases, _trigger_fn(args))
     print(render_json(trigger=metrics) if args.json else render_human(trigger=metrics))
+    if args.min_recall is not None and metrics["recall"] < args.min_recall:
+        print(f"FAIL: recall {metrics['recall']:.0%} below --min-recall {args.min_recall:.0%}", file=sys.stderr)
+        return 1
     return 0
 
 
@@ -55,6 +58,7 @@ def main(argv=None) -> int:
     t.add_argument("--model", help="OpenAI-compatible model id (omit for the zero-cost heuristic)")
     t.add_argument("--base-url", help="OpenAI-compatible base url (for local/cheap models)")
     t.add_argument("--json", action="store_true")
+    t.add_argument("--min-recall", type=float, help="exit non-zero if recall falls below this (CI gate)")
 
     e = sub.add_parser("efficacy", help="does the skill actually help? (needs a model)")
     e.add_argument("skill")
