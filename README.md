@@ -73,6 +73,21 @@ efficacy (with skill vs without):
 
 Point `--model` and `--base-url` at anything OpenAI-compatible: OpenAI, Together, Groq, or a local model via Ollama or LM Studio. The whole idea is that validating a skill should cost cents, not a research budget.
 
+## Gate it in CI
+
+Drop the bundled Action into a workflow so a skill that stops triggering fails the build. The free heuristic needs no key:
+
+```yaml
+- uses: ContextJet-ai/skillvitals@main
+  with:
+    skill: ./SKILL.md
+    cases: ./cases.yaml
+    min-recall: "0.8"
+    # optional graded run: model: gpt-4o-mini  (needs OPENAI_API_KEY)
+```
+
+This is how the [awesome-llm-observability](https://github.com/ContextJet-ai/awesome-llm-observability) repo checks all 26 of its skills on every push.
+
 ## Why this exists
 
 If you write agent skills, you are guessing at two things: whether the model reliably picks up your skill, and whether it changes the output for the better. This turns both guesses into numbers you can run in CI, on a model you can afford.
